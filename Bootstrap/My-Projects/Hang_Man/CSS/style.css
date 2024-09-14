@@ -1,0 +1,327 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+  width: 1080px;
+  margin: 20px auto;
+
+  .game-info {
+    display: flex;
+    justify-content: space-between;
+
+    .rank {
+      font-size: 25px;
+      flex: 1;
+      text-align: center;
+      i {
+        color: gold;
+        font-size: 24px;
+        font-weight: bold;
+      }
+    }
+    .game-name {
+      flex: 1 0 auto;
+    }
+
+    .category {
+      text-align: right;
+      flex: 1;
+      span {
+        text-transform: capitalize;
+        color: #e91e63;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .row {
+    display: flex;
+    .hangman-draw {
+      flex: 1;
+      background-color: #f8f8f8;
+      height: 324px;
+      padding: 20px;
+
+      /* Wrong 1-2-3...*/
+      &.wrong-1 .the-draw,
+      &.wrong-1.wrong-2 .the-stand,
+      &.wrong-1.wrong-2.wrong-3 .the-hang,
+      &.wrong-1.wrong-2.wrong-3.wrong-4 .the-rope,
+      &.wrong-1.wrong-2.wrong-3.wrong-4.wrong-5 .head,
+      &.wrong-1.wrong-2.wrong-3.wrong-4.wrong-5.wrong-6 .body,
+      &.wrong-1.wrong-2.wrong-3.wrong-4.wrong-5.wrong-6.wrong-7 .hands,
+      &.wrong-1.wrong-2.wrong-3.wrong-4.wrong-5.wrong-6.wrong-7.wrong-8 .legs {
+        animation-name: apparence;
+        animation-duration: 0.1s;
+        animation-iteration-count: 2;
+        animation-timing-function: linear;
+        display: block;
+      }
+      &.wrong-1.wrong-2.wrong-3.wrong-4.wrong-5.wrong-6.wrong-7.wrong-8
+        .legs::before {
+        animation-name: machnou9;
+        animation-duration: 2s;
+        animation-iteration-count: 1;
+        animation-timing-function: ease-out;
+        animation-fill-mode: Forwards;
+      }
+
+      .the-draw {
+        display: none;
+        width: 60px;
+        height: 290px;
+
+        border-bottom: 4px solid #222;
+        margin: auto;
+        position: relative;
+        .the-stand {
+          display: none;
+        }
+        .the-stand::before {
+          content: "";
+          position: absolute;
+          height: 100%;
+          background-color: #222;
+          width: 4px;
+          left: calc(50% - 2px);
+        }
+        .the-hang {
+          display: none;
+        }
+        .the-hang::before {
+          content: "";
+          position: absolute;
+          height: 4px;
+          width: 200%;
+          background-color: #222;
+          left: 50%;
+          top: 15px;
+        }
+        .the-hang::after {
+          content: "";
+          position: absolute;
+          height: 30px;
+          width: 4px;
+          background-color: #222;
+          left: 250%;
+          top: 15px;
+        }
+        .the-rope {
+          display: none;
+          position: absolute;
+          height: 80px;
+          width: 80px;
+          border-radius: 50%;
+          border: 4px dashed #222;
+          left: 250%;
+          top: 2px;
+          transform: translate(-50%, 50%);
+        }
+        .the-man {
+          .head {
+            display: none;
+            position: absolute;
+            height: 60px;
+            width: 60px;
+            border-radius: 50%;
+            border: 4px solid #222;
+            left: 250%;
+            top: 21px;
+            transform: translate(-50%, 50%);
+          }
+          .body {
+            display: none;
+            border-left: 4px solid #222;
+            position: absolute;
+            height: 110px;
+            width: 4px;
+            left: 250%;
+            top: 108px;
+          }
+          /* Hands */
+          .hands {
+            display: none;
+          }
+          .hands::before {
+            left: 297%;
+            transform: rotate(50deg);
+          }
+          .hands::after {
+            left: 201%;
+            transform: rotate(-50deg);
+          }
+          .hands::before,
+          .hands::after {
+            content: "";
+            position: absolute;
+            background-color: #222;
+            width: 4px;
+            height: 73px;
+            top: 99px;
+          }
+          /* Legs */
+          .legs {
+            display: none;
+          }
+          .legs::before {
+            left: 297%;
+            transform: rotate(-50deg);
+          }
+          .legs::after {
+            left: 201%;
+            transform: rotate(50deg);
+          }
+          .legs::before,
+          .legs::after {
+            content: "";
+            position: absolute;
+            background-color: #222;
+            width: 4px;
+            height: 73px;
+            top: 202px;
+          }
+        }
+      }
+    }
+    .letters {
+      display: flex;
+      flex-wrap: wrap;
+      flex: 1;
+      justify-content: center;
+
+      background-color: white;
+      padding: 20px;
+
+      &.finished {
+        pointer-events: none;
+        opacity: 0.2;
+      }
+
+      .letter-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2px;
+
+        font-weight: bold;
+        font-size: 24px;
+
+        margin-right: 10px;
+        margin-bottom: 10px;
+        color: white;
+        background-color: #009688;
+        width: 55px;
+        height: 55px;
+        cursor: pointer;
+        &:hover {
+          background-color: white;
+          color: #009688;
+          transition: 0.6s;
+          border: 1px solid #009688;
+        }
+        &.clicked {
+          background-color: #222;
+          pointer-events: none;
+          opacity: 0.1;
+          transition: 0.2s;
+        }
+      }
+    }
+  }
+  .letters-guess {
+    background-color: #f8f8f8;
+    min-height: 104px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+
+    span {
+      width: 60px;
+      height: 60px;
+      line-height: 60px;
+      text-align: center;
+
+      border-bottom: 4px solid #222;
+      color: #222;
+      background-color: white;
+
+      font-size: 24px;
+      font-weight: bold;
+      text-transform: capitalize;
+      margin: 0 10px;
+    }
+    .with-space {
+      background-color: none;
+      border-bottom: none;
+      position: relative;
+    }
+    .with-space::before {
+      content: "";
+      position: absolute;
+      width: 15px;
+      height: 4px;
+      background-color: #009688;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+  hr {
+    border: 2px solid #eee;
+  }
+}
+/*  Start Dynamic Transition  */
+
+@keyframes apparence {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes machnou9 {
+  from {
+    left: 297%;
+    transform: rotate(-50deg);
+  }
+  to {
+    left: 219%;
+    transform: rotate(215deg);
+  }
+}
+/*  End  Dynamic Transition  */
+
+/* Start popup Styling */
+
+.popup {
+  background-color: #009688;
+  color: #f8f8f8;
+  padding: 50px 20px;
+
+  width: 80%;
+  margin: 20px auto;
+
+  border: 1px solid #222;
+  font-size: 40px;
+  text-align: center;
+  &.bad {
+    background-color: #e91e63;
+  }
+}
+/* End popup Styling */
+
+.test {
+  background-color: red;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  position: absolute;
+  left: 244%;
+  top: 208px;
+}

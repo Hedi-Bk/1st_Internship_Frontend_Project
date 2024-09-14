@@ -1,0 +1,6 @@
+{
+  "programming": ["php", "javascript", "go", "scala", "fortran", "r"],
+  "movies": ["Prestige", "Inception", "Parasite", "Interstellar", "Coco", "Up"],
+  "people": ["Hedi bk ", "Med Zou ", "Cleopatra", "Mahatma Ghandi"],
+  "countries": ["Syria", "Palestine", "Yemen", "Egypt", "Bahrain", "Qatar"]
+}
