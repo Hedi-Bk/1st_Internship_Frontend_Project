@@ -25,7 +25,7 @@ During my first internship, I worked on building a **web-based platform** for ki
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 * **HTML5**
 * **CSS3 + Bootstrap**
