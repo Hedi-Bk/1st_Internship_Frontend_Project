@@ -45,13 +45,10 @@ During my first internship, I worked on building a **web-based platform** for ki
 
 ---
 
-## Screenshots (Optional)
+## Screenshots 
 
-
-```md
 ![Homepage](screenshots/home.png)
 ![Login Page](screenshots/login.png)
-```
 
 ---
 
